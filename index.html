@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Celebration of Life at the Hanger</title>
 
-  <!-- Google Fonts (very close to Forms defaults) -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Libre+Baskerville:wght@700&display=swap" rel="stylesheet">
@@ -17,13 +17,11 @@
       font-family: Roboto, Arial, sans-serif;
       color: #202124;
     }
-
     .form-wrapper {
       max-width: 640px;
       margin: 32px auto;
       padding: 0 16px;
     }
-
     .card {
       background: #fff;
       border-radius: 8px;
@@ -31,97 +29,71 @@
       overflow: hidden;
       margin-bottom: 16px;
     }
-
-    .accent-bar {
-      height: 10px;
-      background: #f29900;
-    }
-
-    .card-content {
-      padding: 24px;
-    }
-
-    h1 {
-      font-family: "Libre Baskerville", serif;
-      font-size: 36px;
-      margin: 0 0 12px 0;
-    }
-
-    .description {
-      font-size: 16px;
-      line-height: 1.5;
-    }
-
-    .required-note {
-      color: #d93025;
-      font-size: 14px;
-      margin-top: 16px;
-    }
-
-    .question {
-      font-size: 18px;
-      margin-bottom: 12px;
-    }
-
-    .required-star {
-      color: #d93025;
-    }
-
-    input[type="text"] {
-      width: 100%;
-      border: none;
-      border-bottom: 2px solid #dadce0;
-      font-size: 16px;
-      padding: 8px 4px;
-      outline: none;
-    }
-
-    input[type="text"]:focus {
-      border-bottom-color: #1a73e8;
-    }
-
-    .actions {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 16px;
-    }
-
-    button {
-      background: #1a73e8;
-      color: white;
-      border: none;
-      padding: 10px 24px;
-      border-radius: 4px;
-      font-size: 14px;
-      cursor: pointer;
-    }
-
-    button:disabled {
-      background: #e0e0e0;
-      cursor: not-allowed;
-    }
-
-    .clear {
-      color: #f29900;
-      font-size: 14px;
-      cursor: pointer;
-    }
-
-    .error {
-      color: #d93025;
-      font-size: 14px;
-      margin-top: 8px;
-    }
-
+    .accent-bar { height: 10px; background: #f29900; }
+    .card-content { padding: 24px; }
+    h1 { font-family: "Libre Baskerville", serif; font-size: 36px; margin: 0 0 12px 0; }
+    .description { font-size: 16px; line-height: 1.5; }
+    .question { font-size: 18px; margin-bottom: 12px; }
+    .required-star { color: #d93025; }
+    input[type="text"] { width: 100%; border: none; border-bottom: 2px solid #dadce0; font-size: 16px; padding: 8px 4px; outline: none; }
+    input[type="text"]:focus { border-bottom-color: #1a73e8; }
+    .actions { display: flex; justify-content: space-between; align-items: center; margin-top: 16px; }
+    button { background: #1a73e8; color: white; border: none; padding: 10px 24px; border-radius: 4px; font-size: 14px; cursor: pointer; }
+    button:disabled { background: #e0e0e0; cursor: not-allowed; }
+    .clear { color: #f29900; font-size: 14px; cursor: pointer; }
+    .error { color: #d93025; font-size: 14px; margin-top: 8px; }
     /* Completion screen */
-    .completion {
-      display: none;
-      text-align: center;
-    }
+    .completion { display: none; text-align: center; }
+    .completion h2 { font-family: "Libre Baskerville", serif; font-size: 28px; margin-bottom: 16px; }
+  </style>
+</head>
+<body>
+  <div class="form-wrapper">
+    <div class="card">
+      <div class="accent-bar"></div>
+      <div class="card-content">
+        <h1>Celebration of Life</h1>
+        <p class="description">Please answer the questions below. You can select multiple options where allowed.</p>
 
-    .completion h2 {
-      font-family: "Libre Baskerville", serif;
-      font-size: 28px;
-      margin-bottom: 16px;
-    }
+        <!-- Example multiple-answer question -->
+        <div class="question">
+          What are your favorite colors? <span class="required-star">*</span>
+        </div>
+        <div class="answers">
+          <label><input type="checkbox" name="colors" value="Red"> Red</label><br>
+          <label><input type="checkbox" name="colors" value="Blue"> Blue</label><br>
+          <label><input type="checkbox" name="colors" value="Green"> Green</label><br>
+          <label><input type="checkbox" name="colors" value="Yellow"> Yellow</label><br>
+        </div>
+
+        <div class="actions">
+          <button id="submit-btn">Submit</button>
+          <span class="clear" id="clear-btn">Clear</span>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="completion" id="completion">
+      <h2>Thank you!</h2>
+      <p>Welcome to Jason Ritchie's celebration of life here at The Hangar. Please show this screen to a Hangar employee to receive your drink tokens.</p>
+    </div>
+  </div>
+
+  <script>
+    const submitBtn = document.getElementById('submit-btn');
+    const clearBtn = document.getElementById('clear-btn');
+    const completion = document.getElementById('completion');
+
+    submitBtn.addEventListener('click', () => {
+      // For demo: just show completion screen
+      document.querySelector('.form-wrapper').style.display = 'none';
+      completion.style.display = 'block';
+    });
+
+    clearBtn.addEventListener('click', () => {
+      document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+    });
+  </script>
+</body>
+</html>
