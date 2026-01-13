@@ -45,6 +45,7 @@
     /* Completion screen */
     .completion { display: none; text-align: center; padding: 24px; }
     .completion h2 { font-family: "Libre Baskerville", serif; font-size: 28px; margin-bottom: 16px; }
+    .completion img { max-width: 100%; border-radius: 8px; margin-top: 16px; }
   </style>
 </head>
 <body>
@@ -73,6 +74,7 @@
     <div class="completion" id="completion">
       <h2>Thank you for coming!</h2>
       <p>Please show this screen to a Hangar employee to receive your drink tokens. Share your favorite stories of Jason and enjoy the evening in his memory!</p>
+      <img src="https://cache.legacy.net/legacy/images/cobrands/legacyadn/photos/a0663655-17c1-4b00-b2a5-c5ced231cb56.jpgx?w=405&h=500&option=3" alt="Jason">
     </div>
   </div>
 
@@ -102,7 +104,6 @@
       errorMsg.style.display = 'none';
     });
 
-    // Optional: hide error message as user types
     input.addEventListener('input', () => {
       errorMsg.style.display = 'none';
     });
