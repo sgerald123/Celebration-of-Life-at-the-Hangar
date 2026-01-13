@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Celebration of Life at the Hanger</title>
+  <title>Celebration of Life at the Hangar</title>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -41,9 +41,9 @@
     button { background: #1a73e8; color: white; border: none; padding: 10px 24px; border-radius: 4px; font-size: 14px; cursor: pointer; }
     button:disabled { background: #e0e0e0; cursor: not-allowed; }
     .clear { color: #f29900; font-size: 14px; cursor: pointer; }
-    .error { color: #d93025; font-size: 14px; margin-top: 8px; }
+    .error { color: #d93025; font-size: 14px; margin-top: 8px; display: none; }
     /* Completion screen */
-    .completion { display: none; text-align: center; }
+    .completion { display: none; text-align: center; padding: 24px; }
     .completion h2 { font-family: "Libre Baskerville", serif; font-size: 28px; margin-bottom: 16px; }
   </style>
 </head>
@@ -52,47 +52,59 @@
     <div class="card">
       <div class="accent-bar"></div>
       <div class="card-content">
-        <h1>Celebration of Life</h1>
-        <p class="description">Please answer the questions below. You can select multiple options where allowed.</p>
+        <h1>Celebration of Life at the Hangar</h1>
+        <p class="description">Please answer the question below to ensure you’re here for the right celebration.</p>
 
-        <!-- Example multiple-answer question -->
+        <!-- Short answer question -->
         <div class="question">
-          What are your favorite colors? <span class="required-star">*</span>
+          Who are we here to remember and celebrate? <span class="required-star">*</span>
         </div>
-        <div class="answers">
-          <label><input type="checkbox" name="colors" value="Red"> Red</label><br>
-          <label><input type="checkbox" name="colors" value="Blue"> Blue</label><br>
-          <label><input type="checkbox" name="colors" value="Green"> Green</label><br>
-          <label><input type="checkbox" name="colors" value="Yellow"> Yellow</label><br>
-        </div>
+        <input type="text" id="celebrant-input" placeholder="Type your answer here" />
+        <div class="error" id="error-msg">Try again!</div>
 
         <div class="actions">
           <button id="submit-btn">Submit</button>
           <span class="clear" id="clear-btn">Clear</span>
         </div>
-
       </div>
     </div>
 
+    <!-- Completion screen -->
     <div class="completion" id="completion">
-      <h2>Thank you!</h2>
-      <p>Welcome to Jason Ritchie's celebration of life here at The Hangar. Please show this screen to a Hangar employee to receive your drink tokens.</p>
+      <h2>Thank you for coming!</h2>
+      <p>Please show this screen to a Hangar employee to receive your drink tokens. Share your favorite stories of Jason and enjoy the evening in his memory!</p>
     </div>
   </div>
 
   <script>
     const submitBtn = document.getElementById('submit-btn');
     const clearBtn = document.getElementById('clear-btn');
+    const input = document.getElementById('celebrant-input');
+    const errorMsg = document.getElementById('error-msg');
     const completion = document.getElementById('completion');
+    const formCard = document.querySelector('.card');
+
+    // Allowed answers (case-insensitive)
+    const validAnswers = ["jason", "ritch"];
 
     submitBtn.addEventListener('click', () => {
-      // For demo: just show completion screen
-      document.querySelector('.form-wrapper').style.display = 'none';
-      completion.style.display = 'block';
+      const answer = input.value.trim().toLowerCase();
+      if (validAnswers.includes(answer)) {
+        formCard.style.display = 'none';
+        completion.style.display = 'block';
+      } else {
+        errorMsg.style.display = 'block';
+      }
     });
 
     clearBtn.addEventListener('click', () => {
-      document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+      input.value = '';
+      errorMsg.style.display = 'none';
+    });
+
+    // Optional: hide error message as user types
+    input.addEventListener('input', () => {
+      errorMsg.style.display = 'none';
     });
   </script>
 </body>
